@@ -16,9 +16,11 @@ MORSE_CODE_DICT = { 'A':'.-', 'B':'-...',
                     '0':'-----', ' ' : " / "}
 tmp = ""
 for c in range(1, len(sys.argv)):
-	tmp += sys.argv[c].upper()
+	tmp += sys.argv[c].upper() + " "
 	if re.findall("[^A-Z0-9 ]+", tmp):
 		print("ERROR")
 		exit() 
+tmp = tmp[:-1]
 for c in range(0, len(tmp)):
 	print(MORSE_CODE_DICT[tmp[c]], end = "")
+print("")
