@@ -1,26 +1,26 @@
-from time import sleep
+import time
 import sys
 
 def ft_progress(listy):
+	maxi = max(listy)
+	start_t = time.time()
+	len = 30
 	for i in listy:
+		passed = time.time() - start_t
+		if i == 0:
+			va = 0.0
+		else:
+			va = float((maxi / i) * passed)
+		print("ETA: {:.2f}s [{}%][{}{}{}] {}/{} | elapsed time {:.2f}s".format(va
+		, int(i * 100 / maxi), "=" * int(i / maxi * len), ">" * (i != maxi)
+		, " " * int(len - 1 - int((i / maxi) * len)), i + 1, maxi + 1, passed), end="\r"
+		, flush=True)
+		if i == maxi:
+			print("")
 		yield i
-max = 1000
-t = 0.01
-len = 30
-listy = range(max)
+listy = range(1000)
 ret = 0
 for elem in ft_progress(listy):
-	ret += (elem + 3) % 5
-	sleep(t)
-	print("ETA: ", "{:.2f}".format((max - elem) * t), "s [ "
-	, int(elem * 100 / max), "%][", "=" * int(elem / max * len), ">"
-	, " " * int(len - 1 - int(elem / max * len)), "] ", elem,"/", max
-	, " elapsed time ", "{:.2f}".format(t * elem), "s",sep = "", end = "\r"
-	, flush=True)
-elem += 1
-print("ETA: ", "{:.2f}".format((max - elem) * t), "s [ "
-	, int(elem * 100 / max), "%][", "=" * int(elem / max * len), ">"
-	, " " * int(len - 1 - int(elem / max * len)), "] ", elem,"/", max
-	, " elapsed time ", "{:.2f}".format(t * elem), "s",sep = "", end = "\r"
-	, flush=True)
-print("\n", ret, sep = "")
+    ret += (elem + 3) % 5
+    time.sleep(0.01)
+print(ret)
